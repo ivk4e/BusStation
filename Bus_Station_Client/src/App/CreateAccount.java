@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 
 public class CreateAccount extends javax.swing.JFrame {
 
+    public Connect query = new Connect();
+
     public CreateAccount() {
         initComponents();
         centerScreen();
@@ -21,18 +23,18 @@ public class CreateAccount extends javax.swing.JFrame {
         minimizeButton = new javax.swing.JLabel();
         usernameField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         firstNameField = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         lastNameField = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         emailField = new javax.swing.JTextField();
+        passwordField = new javax.swing.JPasswordField();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
         regestryButton = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        passwordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -82,7 +84,8 @@ public class CreateAccount extends javax.swing.JFrame {
 
         usernameField.setForeground(new java.awt.Color(153, 153, 153));
         usernameField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        usernameField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        usernameField.setText("Потребителско име");
+        usernameField.setBorder(null);
         usernameField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         usernameField.setHighlighter(null);
         usernameField.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -100,13 +103,10 @@ public class CreateAccount extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(86, 153, 188));
         jLabel1.setText("Започни сега...");
 
-        jLabel3.setText("Парола");
-
-        jLabel4.setText("Потребителско име");
-
         firstNameField.setForeground(new java.awt.Color(153, 153, 153));
         firstNameField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        firstNameField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        firstNameField.setText("Име");
+        firstNameField.setBorder(null);
         firstNameField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         firstNameField.setHighlighter(null);
         firstNameField.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -120,11 +120,10 @@ public class CreateAccount extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Име");
-
         lastNameField.setForeground(new java.awt.Color(153, 153, 153));
         lastNameField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        lastNameField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        lastNameField.setText("Фамилия");
+        lastNameField.setBorder(null);
         lastNameField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         lastNameField.setHighlighter(null);
         lastNameField.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -138,13 +137,10 @@ public class CreateAccount extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Фамилия");
-
-        jLabel7.setText("Email");
-
         emailField.setForeground(new java.awt.Color(153, 153, 153));
         emailField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        emailField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        emailField.setText("Email");
+        emailField.setBorder(null);
         emailField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         emailField.setHighlighter(null);
         emailField.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,6 +153,31 @@ public class CreateAccount extends javax.swing.JFrame {
                 emailFieldActionPerformed(evt);
             }
         });
+
+        passwordField.setForeground(new java.awt.Color(153, 153, 153));
+        passwordField.setText("Парола");
+        passwordField.setToolTipText("");
+        passwordField.setBorder(null);
+        passwordField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                passwordFieldMousePressed(evt);
+            }
+        });
+
+        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
+
+        jSeparator2.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
+
+        jSeparator3.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator3.setForeground(new java.awt.Color(204, 204, 204));
+
+        jSeparator4.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator4.setForeground(new java.awt.Color(204, 204, 204));
+
+        jSeparator5.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator5.setForeground(new java.awt.Color(204, 204, 204));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(null);
@@ -188,32 +209,29 @@ public class CreateAccount extends javax.swing.JFrame {
         jPanel2.add(jLabel2);
         jLabel2.setBounds(10, 20, 221, 40);
 
-        passwordField.setToolTipText("");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(menuBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(79, Short.MAX_VALUE)
+                .addContainerGap(78, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(9, 9, 9)))
+                    .addComponent(jLabel1)
                     .addComponent(firstNameField)
                     .addComponent(lastNameField, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emailField)
-                    .addComponent(passwordField))
-                .addContainerGap(61, Short.MAX_VALUE))
+                    .addComponent(passwordField)
+                    .addComponent(jSeparator1)
+                    .addComponent(jSeparator2)
+                    .addComponent(jSeparator3)
+                    .addComponent(jSeparator4)
+                    .addComponent(jSeparator5)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(usernameField, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,36 +239,36 @@ public class CreateAccount extends javax.swing.JFrame {
                 .addComponent(menuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(46, 46, 46)
                 .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
                 .addGap(5, 5, 5)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(4, 4, 4)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(40, 40, 40))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,23 +281,48 @@ public class CreateAccount extends javax.swing.JFrame {
     private void regestryButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regestryButtonMousePressed
         //        new Home().show();
         //        this.dispose();
-        if (usernameField.getText().isEmpty()
-            && new String(passwordField.getPassword()).isEmpty()
-            && firstNameField.getText().isEmpty()
-            && lastNameField.getText().isEmpty()
-            && emailField.getText().isEmpty()) {
+        if (IsDataIncorrect()) {
             JOptionPane.showMessageDialog(this, "Моля, попълнете всички полета!");
         } else {
-            
+            createLogin();
         }
     }//GEN-LAST:event_regestryButtonMousePressed
+
+    private boolean IsDataIncorrect() {
+        return (usernameField.getText().equals("Потребителско име")
+                || usernameField.getText().trim().isEmpty())
+                && (new String(passwordField.getPassword()).equals("Парола")
+                || new String(passwordField.getPassword()).trim().isEmpty())
+                && (firstNameField.getText().equals("Име")
+                || firstNameField.getText().trim().isEmpty())
+                && (lastNameField.getText().equals("Фамилия")
+                || lastNameField.getText().trim().isEmpty())
+                && (emailField.getText().equals("Email")
+                || emailField.getText().trim().isEmpty());
+    }
+
+    private void createLogin() {
+        String username = usernameField.getText().trim();
+        String password = new String(passwordField.getPassword()).trim();
+        String firstName = firstNameField.getText().trim();
+        String lastName = lastNameField.getText().trim();
+        String email = emailField.getText().trim();
+        
+        if (query.insertNewAccount(new String[] { username, password, firstName, lastName, email })) {
+            JOptionPane.showMessageDialog(this, "Успешна регистрация!");
+            new Login().show();
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Този потребител/имейл вече съществува.");
+        }
+    }
 
     private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameFieldActionPerformed
 
     private void usernameFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameFieldMousePressed
-       
+       usernameField.setText("");
     }//GEN-LAST:event_usernameFieldMousePressed
 
     private void menuBarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuBarMousePressed
@@ -295,7 +338,7 @@ public class CreateAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_closeButtonMousePressed
 
     private void firstNameFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_firstNameFieldMousePressed
-        // TODO add your handling code here:
+       firstNameField.setText("");
     }//GEN-LAST:event_firstNameFieldMousePressed
 
     private void firstNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameFieldActionPerformed
@@ -303,7 +346,7 @@ public class CreateAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_firstNameFieldActionPerformed
 
     private void lastNameFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lastNameFieldMousePressed
-        // TODO add your handling code here:
+       lastNameField.setText("");
     }//GEN-LAST:event_lastNameFieldMousePressed
 
     private void lastNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameFieldActionPerformed
@@ -311,12 +354,16 @@ public class CreateAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_lastNameFieldActionPerformed
 
     private void emailFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailFieldMousePressed
-        // TODO add your handling code here:
+        emailField.setText("");
     }//GEN-LAST:event_emailFieldMousePressed
 
     private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_emailFieldActionPerformed
+
+    private void passwordFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordFieldMousePressed
+        passwordField.setText("");
+    }//GEN-LAST:event_passwordFieldMousePressed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -340,13 +387,13 @@ public class CreateAccount extends javax.swing.JFrame {
     private javax.swing.JTextField firstNameField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTextField lastNameField;
     private javax.swing.JPanel menuBar;
     private javax.swing.JLabel minimizeButton;
