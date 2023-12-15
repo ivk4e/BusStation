@@ -6,13 +6,15 @@ import javax.swing.plaf.ColorUIResource;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
+    public Connect query = new Connect();
+    
     public Login() {
         initComponents();
         centerScreen();
-
     }
 
     @SuppressWarnings("unchecked")
@@ -23,8 +25,6 @@ public class Login extends javax.swing.JFrame {
         background_panel = new javax.swing.JPanel();
         usernameField = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
         createNowField = new javax.swing.JLabel();
         infoTextField = new javax.swing.JLabel();
         menuBar = new javax.swing.JPanel();
@@ -34,6 +34,8 @@ public class Login extends javax.swing.JFrame {
         entryButton = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
 
         jButton1.setText("jButton1");
 
@@ -70,10 +72,6 @@ public class Login extends javax.swing.JFrame {
                 passwordFieldMousePressed(evt);
             }
         });
-
-        jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
-
-        jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
 
         createNowField.setForeground(new java.awt.Color(51, 153, 255));
         createNowField.setText("Създай сега");
@@ -160,6 +158,10 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/App/images/user-solid-240.png"))); // NOI18N
 
+        jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
+
+        jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
+
         javax.swing.GroupLayout background_panelLayout = new javax.swing.GroupLayout(background_panel);
         background_panel.setLayout(background_panelLayout);
         background_panelLayout.setHorizontalGroup(
@@ -167,38 +169,37 @@ public class Login extends javax.swing.JFrame {
             .addComponent(menuBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, background_panelLayout.createSequentialGroup()
                 .addContainerGap(117, Short.MAX_VALUE)
-                .addGroup(background_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(background_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(background_panelLayout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(background_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(usernameField, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(passwordField, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(usernameField)
+                    .addComponent(passwordField)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                     .addGroup(background_panelLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(infoTextField)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(createNowField)))
+                        .addComponent(createNowField))
+                    .addComponent(jSeparator1)
+                    .addComponent(jSeparator2))
                 .addGap(113, 113, 113))
         );
         background_panelLayout.setVerticalGroup(
             background_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(background_panelLayout.createSequentialGroup()
                 .addComponent(menuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(39, 39, 39)
                 .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(background_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -251,7 +252,17 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizeButtonMousePressed
 
     private void entryButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entryButtonMousePressed
-        // TODO add your handling code here:
+        String username = usernameField.getText();
+        String password = new String(passwordField.getPassword());
+        
+        if (query.login(new String[] {username, password})) {
+            JOptionPane.showMessageDialog(this, "Успешно влизане!");
+            new Home().show();
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Грешно име или парола!");
+        }
+        
     }//GEN-LAST:event_entryButtonMousePressed
 
     public static void main(String args[]) {
