@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.plaf.ColorUIResource;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -267,18 +268,39 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizeButtonMousePressed
 
     private void entryButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entryButtonMousePressed
+        createLogin();
+    }//GEN-LAST:event_entryButtonMousePressed
+
+    private void createLogin() throws HeadlessException {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());
         
         if (query.login(new String[] {username, password})) {
             JOptionPane.showMessageDialog(this, "Успешно влизане!");
-            new Home().show();
+            UserInfo.setUsername(username);
+            
+            ArrayList<Customer> customerList = query.selectNames(username);
+            
+            if (!customerList.isEmpty()) {
+                Customer customer = customerList.get(0);
+                String firstName = customer.getFirstName();
+                String lastName = customer.getLastName();
+                String email = customer.getEmail();
+                
+                UserInfo.setFirstName(firstName);
+                UserInfo.setLastName(lastName);
+                UserInfo.setEmail(email);
+                UserInfo.setPassword(password);
+            }
+            
             this.dispose();
+            query.close();
+            new Home().show();
+            
         } else {
             JOptionPane.showMessageDialog(this, "Грешно име или парола!");
         }
-        
-    }//GEN-LAST:event_entryButtonMousePressed
+    }
 
      private void removePlaceholder(JTextField textField, String USERNAME)
     {

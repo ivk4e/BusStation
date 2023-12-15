@@ -9,8 +9,9 @@ public class Home extends javax.swing.JFrame {
     public Home() {
         initComponents();
         centerScreen();
+        generateLabels();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -27,7 +28,6 @@ public class Home extends javax.swing.JFrame {
         closeButton = new javax.swing.JLabel();
         minimizeButton = new javax.swing.JLabel();
         firstNameLabel = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -50,7 +50,7 @@ public class Home extends javax.swing.JFrame {
         nameClientField.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         nameClientField.setText("{name}");
         jPanel1.add(nameClientField);
-        nameClientField.setBounds(330, 60, 240, 48);
+        nameClientField.setBounds(320, 60, 240, 48);
 
         mainMenu.setBackground(new java.awt.Color(86, 153, 188));
 
@@ -140,10 +140,7 @@ public class Home extends javax.swing.JFrame {
         });
 
         firstNameLabel.setForeground(new java.awt.Color(255, 255, 255));
-        firstNameLabel.setText("{firstName}");
-
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("{lastName}");
+        firstNameLabel.setText("{username}");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/App/images/bus.png"))); // NOI18N
 
@@ -161,13 +158,11 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 362, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 406, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(firstNameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(61, 61, 61)
+                .addGap(81, 81, 81)
                 .addComponent(minimizeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,7 +172,6 @@ public class Home extends javax.swing.JFrame {
             menuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(closeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
             .addComponent(minimizeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(firstNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -258,7 +252,12 @@ public class Home extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    private void generateLabels() {
+        firstNameLabel.setText(UserInfo.getUsername());
+        nameClientField.setText(UserInfo.getFirstName());
+    }
+    
     private void centerScreen() {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -274,7 +273,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel helloField;
     private javax.swing.JLabel homeIcon;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

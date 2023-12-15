@@ -12,6 +12,16 @@ public class Customer {
         
     }
     
+    public Customer(String userName) {
+        this.userName = userName;
+    }
+    
+    public Customer(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+   
     public Customer(int customerId, String userName, String password, String firstName, String lastName, String email) {
         this.customerId = customerId;
         this.userName = userName;
@@ -54,4 +64,8 @@ public class Customer {
         return email;
     }
     
+    @Override
+    public String toString(){
+        return firstName + " " + lastName;
+    }
 }

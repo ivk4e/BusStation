@@ -279,8 +279,6 @@ public class CreateAccount extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void regestryButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regestryButtonMousePressed
-        //        new Home().show();
-        //        this.dispose();
         if (IsDataIncorrect()) {
             JOptionPane.showMessageDialog(this, "Моля, попълнете всички полета!");
         } else {

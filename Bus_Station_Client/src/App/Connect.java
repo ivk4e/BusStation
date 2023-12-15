@@ -2,7 +2,6 @@ package App;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
-import javax.swing.JOptionPane;
 
 public class Connect {
     public Connection conn;
@@ -17,7 +16,7 @@ public class Connect {
         } 
     }
     
-    public void Close(){
+    public void close(){
         try {
             if (conn != null) {
                 conn.close();
@@ -57,7 +56,7 @@ public class Connect {
         
     }
     
-   public boolean login(String[] loginInfo) {
+    public boolean login(String[] loginInfo) {
         String sql = "SELECT AccountId, Username, FirstName, LastName, Email FROM Accounts WHERE Username = ? AND Password = ?";
 
         try {
@@ -108,11 +107,137 @@ public class Connect {
     private boolean isEmailUnique(String email) {
         String sql = "SELECT COUNT(*) FROM Accounts WHERE Email = ?";
 
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, email);
             try (ResultSet rs = pstmt.executeQuery()) {
                 return rs.getInt(1) == 0;
             }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+    public ArrayList<Customer> selectNames(String username) {
+        String sql = "SELECT FirstName, LastName, Email FROM Accounts WHERE Username = ?";
+        
+        ArrayList<Customer> names = new ArrayList();
+        
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, username);
+            rs = pstmt.executeQuery();
+            
+            while (rs.next()){
+                String firstName = rs.getString("Firstname");
+                String lastName = rs.getString("Lastname");
+                String email = rs.getString("Email");
+                names.add(new Customer(firstName, lastName, email));
+            }
+                    
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return names;
+    }
+    
+    public boolean updateFirstAndLastName(String newFirstName, String newLastName) {
+        String sql = "UPDATE Accounts SET FirstName = ?, LastName = ? WHERE Username = ?";
+        
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            System.out.println();
+            pstmt.setString(1, newFirstName);
+            pstmt.setString(2, newLastName);
+            pstmt.setString(3, UserInfo.getUsername());
+            
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Обновихме данните!");
+                return true;
+            } else {
+                System.out.println("Не успяхме да обновим данните!");
+                return false;
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean updateUsername(String newUsername) {
+        String sql = "UPDATE Accounts SET Username = ? WHERE Username = ?";
+        
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            System.out.println();
+            pstmt.setString(1, newUsername);
+            pstmt.setString(2, UserInfo.getUsername());
+            
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Обновихме данните!");
+                return true;
+            } else {
+                System.out.println("Не успяхме да обновим данните!");
+                return false;
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean updatePassword(String newPassword) {
+        String sql = "UPDATE Accounts SET Password = ? WHERE Username = ?";
+        
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            System.out.println();
+            pstmt.setString(1, newPassword);
+            pstmt.setString(2, UserInfo.getUsername());
+            
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Обновихме данните!");
+                return true;
+            } else {
+                System.out.println("Не успяхме да обновим данните!");
+                return false;
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean updateEmail(String newEmail) {
+        String sql = "UPDATE Accounts SET Email = ? WHERE Username = ?";
+        
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            System.out.println();
+            pstmt.setString(1, newEmail);
+            pstmt.setString(2, UserInfo.getUsername());
+            
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Обновихме данните!");
+                return true;
+            } else {
+                System.out.println("Не успяхме да обновим данните!");
+                return false;
+            }
+            
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
