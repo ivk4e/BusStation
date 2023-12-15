@@ -7,10 +7,23 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class Login extends javax.swing.JFrame {
 
     public Connect query = new Connect();
+    
+    public enum Placeholder {
+        USERNAME("Потребителско име"),
+        PASSWORD("Парола");
+
+        public final String placeholder;
+
+        private Placeholder(String placeholder) {
+            this.placeholder = placeholder;
+        }
+    }   
     
     public Login() {
         initComponents();
@@ -236,7 +249,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_createNowFieldMousePressed
 
     private void passwordFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordFieldMousePressed
-        passwordField.setText("");
+        removePlaceholder(passwordField, Placeholder.PASSWORD.placeholder);
+        restorePlaceholder(usernameField, Placeholder.USERNAME.placeholder);
     }//GEN-LAST:event_passwordFieldMousePressed
 
     private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
@@ -244,7 +258,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameFieldActionPerformed
 
     private void usernameFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameFieldMousePressed
-        usernameField.setText("");
+        removePlaceholder(usernameField, Placeholder.USERNAME.placeholder);
+        restorePlaceholder(passwordField, Placeholder.PASSWORD.placeholder);
     }//GEN-LAST:event_usernameFieldMousePressed
 
     private void minimizeButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMousePressed
@@ -265,6 +280,43 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_entryButtonMousePressed
 
+     private void removePlaceholder(JTextField textField, String USERNAME)
+    {
+        if(textField.getText().equals(USERNAME))
+        {
+            textField.setText("");
+        }
+    }
+    
+    private void restorePlaceholder(JTextField textField,String USERNAME)
+    {
+        if(textField.getText().trim().length() == 0)
+        {
+            textField.setText(String.valueOf(USERNAME));
+        }
+    }
+    
+    private void removePlaceholder(JPasswordField passwordField,String PASSWORD)
+    {
+        System.out.println(passwordField.getPassword());
+        System.out.println(PASSWORD);
+        System.out.println(String.valueOf(passwordField.getPassword()).equals(PASSWORD));
+        if(String.valueOf(passwordField.getPassword()).equals(PASSWORD))
+        {
+            
+            passwordField.setText("");
+        }
+    }
+    
+    private void restorePlaceholder(JPasswordField passwordField,String PASSWORD)
+    {
+        if(passwordField.getPassword().length == 0)
+        {
+            passwordField.setText(String.valueOf(PASSWORD));
+        }
+    }
+    
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
