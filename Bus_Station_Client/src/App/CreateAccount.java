@@ -9,6 +9,20 @@ public class CreateAccount extends javax.swing.JFrame {
 
     public Connect query = new Connect();
 
+    public enum Placeholder {
+        USERNAME("Потребителско име"),
+        PASSWORD("Парола"),
+        FIRST_NAME("Име"),
+        LAST_NAME("Фамилия"),
+        EMAIL("Email");
+
+        public final String value;
+
+        private Placeholder(String placeholder) {
+            this.value = placeholder;
+        }
+    }
+    
     public CreateAccount() {
         initComponents();
         centerScreen();
@@ -40,6 +54,11 @@ public class CreateAccount extends javax.swing.JFrame {
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
 
         menuBar.setBackground(new java.awt.Color(0, 84, 142));
         menuBar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -88,14 +107,22 @@ public class CreateAccount extends javax.swing.JFrame {
         usernameField.setBorder(null);
         usernameField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         usernameField.setHighlighter(null);
+        usernameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                usernameFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                usernameFieldFocusLost(evt);
+            }
+        });
         usernameField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 usernameFieldMousePressed(evt);
             }
         });
-        usernameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameFieldActionPerformed(evt);
+        usernameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                usernameFieldKeyPressed(evt);
             }
         });
 
@@ -109,14 +136,22 @@ public class CreateAccount extends javax.swing.JFrame {
         firstNameField.setBorder(null);
         firstNameField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         firstNameField.setHighlighter(null);
+        firstNameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                firstNameFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                firstNameFieldFocusLost(evt);
+            }
+        });
         firstNameField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 firstNameFieldMousePressed(evt);
             }
         });
-        firstNameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstNameFieldActionPerformed(evt);
+        firstNameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                firstNameFieldKeyPressed(evt);
             }
         });
 
@@ -126,14 +161,22 @@ public class CreateAccount extends javax.swing.JFrame {
         lastNameField.setBorder(null);
         lastNameField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         lastNameField.setHighlighter(null);
+        lastNameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                lastNameFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                lastNameFieldFocusLost(evt);
+            }
+        });
         lastNameField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lastNameFieldMousePressed(evt);
             }
         });
-        lastNameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lastNameFieldActionPerformed(evt);
+        lastNameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lastNameFieldKeyPressed(evt);
             }
         });
 
@@ -143,14 +186,22 @@ public class CreateAccount extends javax.swing.JFrame {
         emailField.setBorder(null);
         emailField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         emailField.setHighlighter(null);
+        emailField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                emailFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                emailFieldFocusLost(evt);
+            }
+        });
         emailField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 emailFieldMousePressed(evt);
             }
         });
-        emailField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailFieldActionPerformed(evt);
+        emailField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                emailFieldKeyPressed(evt);
             }
         });
 
@@ -158,9 +209,22 @@ public class CreateAccount extends javax.swing.JFrame {
         passwordField.setText("Парола");
         passwordField.setToolTipText("");
         passwordField.setBorder(null);
+        passwordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                passwordFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                passwordFieldFocusLost(evt);
+            }
+        });
         passwordField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 passwordFieldMousePressed(evt);
+            }
+        });
+        passwordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordFieldKeyPressed(evt);
             }
         });
 
@@ -315,16 +379,20 @@ public class CreateAccount extends javax.swing.JFrame {
         }
     }
 
-    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_usernameFieldActionPerformed
-
     private void usernameFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameFieldMousePressed
-       usernameField.setText("");
+        PlaceholderUtility.removePlaceholder(usernameField, Placeholder.USERNAME.value);
+        PlaceholderUtility.restorePlaceholder(passwordField, Placeholder.PASSWORD.value);
+        PlaceholderUtility.restorePlaceholder(firstNameField, Placeholder.FIRST_NAME.value);
+        PlaceholderUtility.restorePlaceholder(lastNameField, Placeholder.LAST_NAME.value);
+        PlaceholderUtility.restorePlaceholder(emailField, Placeholder.EMAIL.value);
     }//GEN-LAST:event_usernameFieldMousePressed
 
     private void menuBarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuBarMousePressed
-
+        PlaceholderUtility.restorePlaceholder(usernameField, Placeholder.USERNAME.value);
+        PlaceholderUtility.restorePlaceholder(passwordField, Placeholder.PASSWORD.value);
+        PlaceholderUtility.restorePlaceholder(firstNameField, Placeholder.FIRST_NAME.value);
+        PlaceholderUtility.restorePlaceholder(lastNameField, Placeholder.LAST_NAME.value);
+        PlaceholderUtility.restorePlaceholder(emailField, Placeholder.EMAIL.value);
     }//GEN-LAST:event_menuBarMousePressed
 
     private void minimizeButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMousePressed
@@ -336,32 +404,104 @@ public class CreateAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_closeButtonMousePressed
 
     private void firstNameFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_firstNameFieldMousePressed
-       firstNameField.setText("");
+        PlaceholderUtility.removePlaceholder(firstNameField, Placeholder.FIRST_NAME.value);
+        PlaceholderUtility.restorePlaceholder(usernameField, Placeholder.USERNAME.value);
+        PlaceholderUtility.restorePlaceholder(passwordField, Placeholder.PASSWORD.value);
+        PlaceholderUtility.restorePlaceholder(lastNameField, Placeholder.LAST_NAME.value);
+        PlaceholderUtility.restorePlaceholder(emailField, Placeholder.EMAIL.value);
     }//GEN-LAST:event_firstNameFieldMousePressed
 
-    private void firstNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_firstNameFieldActionPerformed
-
     private void lastNameFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lastNameFieldMousePressed
-       lastNameField.setText("");
+        PlaceholderUtility.removePlaceholder(lastNameField, Placeholder.LAST_NAME.value);
+        PlaceholderUtility.restorePlaceholder(usernameField, Placeholder.USERNAME.value);
+        PlaceholderUtility.restorePlaceholder(passwordField, Placeholder.PASSWORD.value);
+        PlaceholderUtility.restorePlaceholder(firstNameField, Placeholder.FIRST_NAME.value);
+        PlaceholderUtility.restorePlaceholder(emailField, Placeholder.EMAIL.value);
     }//GEN-LAST:event_lastNameFieldMousePressed
 
-    private void lastNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lastNameFieldActionPerformed
-
     private void emailFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailFieldMousePressed
-        emailField.setText("");
+        PlaceholderUtility.removePlaceholder(emailField, Placeholder.EMAIL.value);
+        PlaceholderUtility.restorePlaceholder(usernameField, Placeholder.USERNAME.value);
+        PlaceholderUtility.restorePlaceholder(passwordField, Placeholder.PASSWORD.value);
+        PlaceholderUtility.restorePlaceholder(firstNameField, Placeholder.FIRST_NAME.value);
+        PlaceholderUtility.restorePlaceholder(lastNameField, Placeholder.LAST_NAME.value);
     }//GEN-LAST:event_emailFieldMousePressed
 
-    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailFieldActionPerformed
-
     private void passwordFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordFieldMousePressed
-        passwordField.setText("");
+        PlaceholderUtility.removePlaceholder(passwordField, Placeholder.PASSWORD.value);
+        PlaceholderUtility.restorePlaceholder(usernameField, Placeholder.USERNAME.value);
+        PlaceholderUtility.restorePlaceholder(firstNameField, Placeholder.FIRST_NAME.value);
+        PlaceholderUtility.restorePlaceholder(lastNameField, Placeholder.LAST_NAME.value);
+        PlaceholderUtility.restorePlaceholder(emailField, Placeholder.EMAIL.value);
     }//GEN-LAST:event_passwordFieldMousePressed
+
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        PlaceholderUtility.restorePlaceholder(usernameField, Placeholder.USERNAME.value);
+        PlaceholderUtility.restorePlaceholder(passwordField, Placeholder.PASSWORD.value);
+        PlaceholderUtility.restorePlaceholder(firstNameField, Placeholder.FIRST_NAME.value);
+        PlaceholderUtility.restorePlaceholder(lastNameField, Placeholder.LAST_NAME.value);
+        PlaceholderUtility.restorePlaceholder(emailField, Placeholder.EMAIL.value);
+    }//GEN-LAST:event_jPanel1MousePressed
+
+    private void usernameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameFieldKeyPressed
+        PlaceholderUtility.removePlaceholder(usernameField, Placeholder.USERNAME.value);
+    }//GEN-LAST:event_usernameFieldKeyPressed
+
+    private void usernameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFieldFocusLost
+        PlaceholderUtility.restorePlaceholder(usernameField, Placeholder.USERNAME.value);
+    }//GEN-LAST:event_usernameFieldFocusLost
+
+    private void usernameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFieldFocusGained
+        PlaceholderUtility.moveCaretPositionToFront(usernameField, Placeholder.USERNAME.value);
+    }//GEN-LAST:event_usernameFieldFocusGained
+
+    private void passwordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusGained
+        PlaceholderUtility.moveCaretPositionToFront(passwordField, Placeholder.PASSWORD.value);
+    }//GEN-LAST:event_passwordFieldFocusGained
+
+    private void passwordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusLost
+        PlaceholderUtility.restorePlaceholder(passwordField, Placeholder.PASSWORD.value);
+    }//GEN-LAST:event_passwordFieldFocusLost
+
+    private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyPressed
+        PlaceholderUtility.removePlaceholder(passwordField, Placeholder.PASSWORD.value);
+    }//GEN-LAST:event_passwordFieldKeyPressed
+
+    private void firstNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNameFieldFocusGained
+        PlaceholderUtility.moveCaretPositionToFront(firstNameField, Placeholder.FIRST_NAME.value);
+    }//GEN-LAST:event_firstNameFieldFocusGained
+
+    private void firstNameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNameFieldFocusLost
+        PlaceholderUtility.restorePlaceholder(firstNameField, Placeholder.FIRST_NAME.value);
+    }//GEN-LAST:event_firstNameFieldFocusLost
+
+    private void lastNameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastNameFieldKeyPressed
+       PlaceholderUtility.removePlaceholder(lastNameField, Placeholder.LAST_NAME.value);
+    }//GEN-LAST:event_lastNameFieldKeyPressed
+
+    private void lastNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastNameFieldFocusGained
+        PlaceholderUtility.moveCaretPositionToFront(lastNameField, Placeholder.LAST_NAME.value);
+    }//GEN-LAST:event_lastNameFieldFocusGained
+
+    private void lastNameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastNameFieldFocusLost
+        PlaceholderUtility.restorePlaceholder(lastNameField, Placeholder.LAST_NAME.value);
+    }//GEN-LAST:event_lastNameFieldFocusLost
+
+    private void emailFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFieldFocusGained
+        PlaceholderUtility.moveCaretPositionToFront(emailField, Placeholder.EMAIL.value);
+    }//GEN-LAST:event_emailFieldFocusGained
+
+    private void emailFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFieldFocusLost
+        PlaceholderUtility.restorePlaceholder(emailField, Placeholder.EMAIL.value);
+    }//GEN-LAST:event_emailFieldFocusLost
+
+    private void emailFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailFieldKeyPressed
+        PlaceholderUtility.removePlaceholder(emailField, Placeholder.EMAIL.value);
+    }//GEN-LAST:event_emailFieldKeyPressed
+
+    private void firstNameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_firstNameFieldKeyPressed
+        PlaceholderUtility.removePlaceholder(firstNameField, Placeholder.FIRST_NAME.value);
+    }//GEN-LAST:event_firstNameFieldKeyPressed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

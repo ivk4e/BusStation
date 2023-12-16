@@ -46,7 +46,7 @@ public class Connect {
                 int res = pstmt.executeUpdate();
                 return true;
             } else {
-                System.out.println("This username/email already exists");
+                System.out.println("Това потребителско име или парола вече съществуват");
                 return false;
             }
         } catch (SQLException ex) {
@@ -75,10 +75,10 @@ public class Connect {
                 String lastName = rs.getString("LastName");
                 String email = rs.getString("Email");
 
-                System.out.println("Login successful. Welcome, " + firstName + " " + lastName + "!");
+                System.out.println("Успешно влизане. Добре дошъл, " + firstName + " " + lastName + "!");
                 return true;
             } else {
-                System.out.println("Incorrect username or password.");
+                System.out.println("Неправилно потребителско име или парола");
                 return false;
             }
 

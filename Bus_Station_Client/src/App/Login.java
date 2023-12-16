@@ -19,12 +19,12 @@ public class Login extends javax.swing.JFrame {
         USERNAME("Потребителско име"),
         PASSWORD("Парола");
 
-        public final String placeholder;
+        public final String value;
 
         private Placeholder(String placeholder) {
-            this.placeholder = placeholder;
+            this.value = placeholder;
         }
-    }   
+    }
     
     public Login() {
         initComponents();
@@ -59,6 +59,11 @@ public class Login extends javax.swing.JFrame {
         setUndecorated(true);
 
         background_panel.setBackground(new java.awt.Color(255, 255, 255));
+        background_panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                background_panelMousePressed(evt);
+            }
+        });
 
         usernameField.setForeground(new java.awt.Color(153, 153, 153));
         usernameField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -67,23 +72,44 @@ public class Login extends javax.swing.JFrame {
         usernameField.setBorder(null);
         usernameField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         usernameField.setHighlighter(null);
+        usernameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                usernameFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                usernameFieldFocusLost(evt);
+            }
+        });
         usernameField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 usernameFieldMousePressed(evt);
             }
         });
-        usernameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameFieldActionPerformed(evt);
+        usernameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                usernameFieldKeyPressed(evt);
             }
         });
 
         passwordField.setForeground(new java.awt.Color(153, 153, 153));
         passwordField.setText("Парола");
         passwordField.setBorder(null);
+        passwordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                passwordFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                passwordFieldFocusLost(evt);
+            }
+        });
         passwordField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 passwordFieldMousePressed(evt);
+            }
+        });
+        passwordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordFieldKeyPressed(evt);
             }
         });
 
@@ -237,7 +263,8 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuBarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuBarMousePressed
-        
+        PlaceholderUtility.restorePlaceholder(usernameField, Placeholder.USERNAME.value);
+        PlaceholderUtility.restorePlaceholder(passwordField, Placeholder.PASSWORD.value);
     }//GEN-LAST:event_menuBarMousePressed
 
     private void closeButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonMousePressed
@@ -245,22 +272,19 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_closeButtonMousePressed
 
     private void createNowFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createNowFieldMousePressed
+        query.close();
         new CreateAccount().show();
         this.dispose();
     }//GEN-LAST:event_createNowFieldMousePressed
 
     private void passwordFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordFieldMousePressed
-        removePlaceholder(passwordField, Placeholder.PASSWORD.placeholder);
-        restorePlaceholder(usernameField, Placeholder.USERNAME.placeholder);
+        PlaceholderUtility.removePlaceholder(passwordField, Placeholder.PASSWORD.value);
+        PlaceholderUtility.restorePlaceholder(usernameField, Placeholder.USERNAME.value);
     }//GEN-LAST:event_passwordFieldMousePressed
 
-    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_usernameFieldActionPerformed
-
     private void usernameFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameFieldMousePressed
-        removePlaceholder(usernameField, Placeholder.USERNAME.placeholder);
-        restorePlaceholder(passwordField, Placeholder.PASSWORD.placeholder);
+        PlaceholderUtility.removePlaceholder(usernameField, Placeholder.USERNAME.value);
+        PlaceholderUtility.restorePlaceholder(passwordField, Placeholder.PASSWORD.value);
     }//GEN-LAST:event_usernameFieldMousePressed
 
     private void minimizeButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMousePressed
@@ -270,6 +294,35 @@ public class Login extends javax.swing.JFrame {
     private void entryButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entryButtonMousePressed
         createLogin();
     }//GEN-LAST:event_entryButtonMousePressed
+
+    private void usernameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFieldFocusGained
+        PlaceholderUtility.moveCaretPositionToFront(usernameField, Placeholder.USERNAME.value);
+    }//GEN-LAST:event_usernameFieldFocusGained
+
+    private void usernameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFieldFocusLost
+        PlaceholderUtility.restorePlaceholder(usernameField, Placeholder.USERNAME.value);
+    }//GEN-LAST:event_usernameFieldFocusLost
+
+    private void usernameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameFieldKeyPressed
+        PlaceholderUtility.removePlaceholder(usernameField, Placeholder.USERNAME.value);
+    }//GEN-LAST:event_usernameFieldKeyPressed
+
+    private void passwordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusGained
+        PlaceholderUtility.moveCaretPositionToFront(passwordField, Placeholder.PASSWORD.value);
+    }//GEN-LAST:event_passwordFieldFocusGained
+
+    private void passwordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusLost
+        PlaceholderUtility.restorePlaceholder(passwordField, Placeholder.PASSWORD.value);
+    }//GEN-LAST:event_passwordFieldFocusLost
+
+    private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyPressed
+        PlaceholderUtility.removePlaceholder(passwordField, Placeholder.PASSWORD.value);
+    }//GEN-LAST:event_passwordFieldKeyPressed
+
+    private void background_panelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_background_panelMousePressed
+        PlaceholderUtility.restorePlaceholder(usernameField, Placeholder.USERNAME.value);
+        PlaceholderUtility.restorePlaceholder(passwordField, Placeholder.PASSWORD.value);
+    }//GEN-LAST:event_background_panelMousePressed
 
     private void createLogin() throws HeadlessException {
         String username = usernameField.getText();
