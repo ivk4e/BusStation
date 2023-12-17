@@ -2,20 +2,34 @@ package App;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 public class Home extends javax.swing.JFrame {
 
+    Connect query = new Connect();
+    DefaultTableModel table;
+    ArrayList<TicketExtendet> data = new ArrayList();
+    
     public Home() {
         initComponents();
         centerScreen();
         generateLabels();
+        
+        loadTable();
     }
+
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         helloField = new javax.swing.JLabel();
         nameClientField = new javax.swing.JLabel();
@@ -35,6 +49,14 @@ public class Home extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+
+        jMenuItem1.setText("Изтрий билет");
+        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem1MousePressed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -186,19 +208,29 @@ public class Home extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Град на тръгване", "Град на пристигане", "Дата", "Час"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(170, 200, 590, 150);
+        jScrollPane1.setBounds(170, 200, 590, 170);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel5.setText("Предстоящи курсове...");
+        jLabel5.setText("Предстоящите ти пътувания...");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(170, 170, 160, 20);
+        jLabel5.setBounds(170, 170, 220, 20);
 
         jSeparator1.setForeground(new java.awt.Color(0, 84, 142));
         jPanel1.add(jSeparator1);
@@ -231,19 +263,49 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_menuBarMousePressed
 
     private void ticketsIconMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ticketsIconMousePressed
+        query.close();
         new Tickets().show();
         this.dispose();
     }//GEN-LAST:event_ticketsIconMousePressed
 
     private void profileIconMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileIconMousePressed
+        query.close();
         new Account().show();
         this.dispose();
     }//GEN-LAST:event_profileIconMousePressed
 
     private void logOutIconMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutIconMousePressed
+        query.close();
         new Login().show();
         this.dispose();
     }//GEN-LAST:event_logOutIconMousePressed
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+//        Трябва да се направи
+        int code = evt.getKeyCode();
+        if(code == KeyEvent.VK_DELETE){
+            int selection = jTable1.getSelectedRow();
+            int selectedTicketId = data.get(selection).getTicketId();
+            query.deleteTicketFromAccount(selectedTicketId);
+            table.removeRow(selection);
+        }
+    }//GEN-LAST:event_jTable1KeyPressed
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+         if (SwingUtilities.isRightMouseButton(evt)) {
+            jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY()); //poqvqva se tam kudeto e natisnat desen buton
+            int index = jTable1.rowAtPoint(evt.getPoint());
+            jTable1.setRowSelectionInterval(index, index); 
+            
+        }
+    }//GEN-LAST:event_jTable1MousePressed
+
+    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+            int selection = jTable1.getSelectedRow();
+            int selectedTicketId = data.get(selection).getTicketId();
+            query.deleteTicketFromAccount(selectedTicketId);
+            table.removeRow(selection);
+    }//GEN-LAST:event_jMenuItem1MousePressed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -266,6 +328,21 @@ public class Home extends javax.swing.JFrame {
 
     setLocation(centerX, centerY);
     }
+    
+    private void loadTable() {
+        table = (DefaultTableModel)jTable1.getModel();
+        
+        table.setRowCount(0);
+        data = query.selectAllCoursesForAccount();
+        
+        for (int i = 0; i < data.size(); i++) {
+            table.addRow(data.get(i).toArray());
+        }
+        
+        if (rootPaneCheckingEnabled) {
+            
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel closeButton;
@@ -276,7 +353,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;

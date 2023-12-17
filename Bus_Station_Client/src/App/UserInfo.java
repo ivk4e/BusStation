@@ -1,11 +1,20 @@
 package App;
 
 public final class UserInfo {
+    private static int userId;
     private static String username;
     private static String firstName;
     private static String lastName;
     private static String email;
     private static String password;
+    
+    public static int getUserId() {
+        return userId;
+    } 
+    
+    public static void setUserId(int value) {
+        userId = value;
+    }
     
     public static String getUsername() {
         return username;

@@ -343,25 +343,25 @@ public class CreateAccount extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void regestryButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regestryButtonMousePressed
-        if (IsDataIncorrect()) {
+        if (isDataIncorrect()) {
             JOptionPane.showMessageDialog(this, "Моля, попълнете всички полета!");
         } else {
             createLogin();
         }
     }//GEN-LAST:event_regestryButtonMousePressed
 
-    private boolean IsDataIncorrect() {
-        return (usernameField.getText().equals("Потребителско име")
-                || usernameField.getText().trim().isEmpty())
-                && (new String(passwordField.getPassword()).equals("Парола")
-                || new String(passwordField.getPassword()).trim().isEmpty())
-                && (firstNameField.getText().equals("Име")
-                || firstNameField.getText().trim().isEmpty())
-                && (lastNameField.getText().equals("Фамилия")
-                || lastNameField.getText().trim().isEmpty())
-                && (emailField.getText().equals("Email")
-                || emailField.getText().trim().isEmpty());
-    }
+    private boolean isDataIncorrect() {
+    return usernameField.getText().equals("Потребителско име")
+            || new String(passwordField.getPassword()).equals("Парола")
+            || firstNameField.getText().equals("Име")
+            || lastNameField.getText().equals("Фамилия")
+            || emailField.getText().equals("Email")
+            || usernameField.getText().trim().isEmpty()
+            || new String(passwordField.getPassword()).trim().isEmpty()
+            || firstNameField.getText().trim().isEmpty()
+            || lastNameField.getText().trim().isEmpty()
+            || emailField.getText().trim().isEmpty();
+}
 
     private void createLogin() {
         String username = usernameField.getText().trim();

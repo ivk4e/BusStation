@@ -119,8 +119,8 @@ public class Connect {
         }
     }
     
-    public ArrayList<Customer> selectNames(String username) {
-        String sql = "SELECT FirstName, LastName, Email FROM Accounts WHERE Username = ?";
+    public ArrayList<Customer> selectUserInfo(String username) {
+        String sql = "SELECT AccountId, FirstName, LastName, Email FROM Accounts WHERE Username = ?";
         
         ArrayList<Customer> names = new ArrayList();
         
@@ -128,12 +128,12 @@ public class Connect {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
             rs = pstmt.executeQuery();
-            
             while (rs.next()){
+                int accountId = rs.getInt("AccountId");
                 String firstName = rs.getString("Firstname");
                 String lastName = rs.getString("Lastname");
                 String email = rs.getString("Email");
-                names.add(new Customer(firstName, lastName, email));
+                names.add(new Customer(accountId, firstName, lastName, email));
             }
                     
         } catch (SQLException ex) {
@@ -242,5 +242,140 @@ public class Connect {
             System.out.println(ex.getMessage());
             return false;
         }
+    }
+    
+    public ArrayList<Course> selectAllCourses()
+    {
+        ArrayList<Course> data = new ArrayList();
+        String sql = "Select * from Courses ORDER by [Date], Hour";
+        
+        try {
+            
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            
+            rs = pstmt.executeQuery();
+            
+            while (rs.next()){
+                int courseId = rs.getInt("CourseId");
+                String cityFrom = rs.getString("CityFrom");
+                String cityTo = rs.getString("CityTo");
+                String date = rs.getString("Date");
+                String hour = rs.getString("Hour");
+                data.add(new Course(courseId, cityFrom, cityTo, date, hour));
+            }
+                    
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return data;
+    }
+    
+    
+    
+    public ArrayList<Course> selectAllCourses(ArrayList<String> columns, ArrayList<String> values) {
+        
+        ArrayList<Course> data = new ArrayList();
+        //System.out.println(columns.size());    
+        int columnsLength = columns.size();
+        String filters = "";
+        for (int i=0; i < columnsLength; i++) 
+        {
+            filters += columns.get(i) + " = ? AND ";
+        }
+        filters = filters.substring(0, filters.length()-4);
+        String sql = "SELECT * FROM Courses WHERE " + filters + "ORDER by [Date], Hour";
+            
+        try {
+            
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            for (int i=0; i < columns.size(); i++) 
+            {
+                pstmt.setString(i+1, values.get(i));
+            }
+            
+            
+            rs = pstmt.executeQuery();
+            
+            while (rs.next()){
+                int courseId = rs.getInt("CourseId");
+                String cityFrom = rs.getString("CityFrom");
+                String cityTo = rs.getString("CityTo");
+                String date = rs.getString("Date");
+                String hour = rs.getString("Hour");
+                data.add(new Course(courseId, cityFrom, cityTo, date, hour));
+            }
+                    
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return data;
+    }
+    
+    public boolean insertIntoTickets(int accountId, int courseId)
+    {
+        String sql = "INSERT INTO Tickets (AccountId, CourseId) VALUES (?,?)";
+        try
+        {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, accountId);
+            pstmt.setInt(2, courseId);
+            int result = pstmt.executeUpdate();
+            System.out.println(result + " Rows inserted");
+            return true;
+
+        } catch(SQLException e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+    
+    public ArrayList<TicketExtendet> selectAllCoursesForAccount()
+    {
+        ArrayList<TicketExtendet> data = new ArrayList();
+        String sql = "SELECT T.TicketId, C.CityFrom, C.CityTo, C.Date, C.Hour "
+                + "FROM Courses AS C JOIN Tickets AS T "
+                + "ON C.CourseId = T.CourseId "
+                + "WHERE T.AccountId = ?";
+        
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, UserInfo.getUserId());
+            rs = pstmt.executeQuery();
+            
+            while (rs.next()){
+                int ticketId = rs.getInt("TicketId");
+                String cityFrom = rs.getString("CityFrom");
+                String cityTo = rs.getString("CityTo");
+                String date = rs.getString("Date");
+                String hour = rs.getString("Hour");
+                data.add(new TicketExtendet(ticketId, cityFrom, cityTo, date, hour));
+            }
+                    
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return data;
+    }
+    
+    public void deleteTicketFromAccount(int ticketId) {
+         String sql = "DELETE FROM Tickets " +
+                        "WHERE TicketId = ?";
+         System.out.println(sql);
+         
+         try {
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             stmt.setInt(1, ticketId);
+             int result = stmt.executeUpdate();
+             
+             System.out.println(result + " Rows deleted");
+             //stmt.setString(1, value);
+             
+         } catch(SQLException e) {
+             System.out.println(e.getMessage());
+         }
     }
 }

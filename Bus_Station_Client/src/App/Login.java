@@ -332,14 +332,16 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Успешно влизане!");
             UserInfo.setUsername(username);
             
-            ArrayList<Customer> customerList = query.selectNames(username);
+            ArrayList<Customer> customerList = query.selectUserInfo(username);
             
             if (!customerList.isEmpty()) {
                 Customer customer = customerList.get(0);
+                int accountId = customer.getCustomerId();
                 String firstName = customer.getFirstName();
                 String lastName = customer.getLastName();
                 String email = customer.getEmail();
                 
+                UserInfo.setUserId(accountId);
                 UserInfo.setFirstName(firstName);
                 UserInfo.setLastName(lastName);
                 UserInfo.setEmail(email);
