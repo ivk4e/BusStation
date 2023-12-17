@@ -12,7 +12,7 @@ public class Home extends javax.swing.JFrame {
 
     Connect query = new Connect();
     DefaultTableModel table;
-    ArrayList<TicketExtendet> data = new ArrayList();
+    ArrayList<TicketExtended> data = new ArrayList();
     
     public Home() {
         initComponents();

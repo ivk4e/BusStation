@@ -51,6 +51,7 @@ public class Account extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         email = new javax.swing.JLabel();
         changeEmailButton = new javax.swing.JLabel();
+        removeAccount = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -380,6 +381,22 @@ public class Account extends javax.swing.JFrame {
         jPanel1.add(jPanel6);
         jPanel6.setBounds(490, 350, 260, 140);
 
+        removeAccount.setBackground(new java.awt.Color(255, 255, 255));
+        removeAccount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        removeAccount.setForeground(new java.awt.Color(255, 0, 0));
+        removeAccount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        removeAccount.setText("Изтрий акаунт");
+        removeAccount.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        removeAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        removeAccount.setOpaque(true);
+        removeAccount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                removeAccountMousePressed(evt);
+            }
+        });
+        jPanel1.add(removeAccount);
+        removeAccount.setBounds(600, 560, 150, 33);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -437,6 +454,29 @@ public class Account extends javax.swing.JFrame {
     private void changeEmailButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changeEmailButtonMousePressed
         modifyEmail();
     }//GEN-LAST:event_changeEmailButtonMousePressed
+
+    private void removeAccountMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeAccountMousePressed
+        JPasswordField passwordField = new JPasswordField();
+        
+        Object[] content = {
+            "Password:", passwordField,
+        };
+        
+        int result = JOptionPane.showConfirmDialog(this, content, "Парола", JOptionPane.OK_CANCEL_OPTION);
+        
+        String password = new String(passwordField.getPassword());
+        
+        if (result == JOptionPane.OK_OPTION) {
+            if (query.deleteAccount(password)) {
+                 JOptionPane.showMessageDialog(this, "Акаунтът е изтрит!");
+                 query.close();
+                 new Login().show();
+                 this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Грешна парола!");
+            }
+        }
+    }//GEN-LAST:event_removeAccountMousePressed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -521,23 +561,25 @@ public class Account extends javax.swing.JFrame {
     }
     
     private void modifyPassword() throws HeadlessException {
-        JPasswordField password = new JPasswordField();
+        JPasswordField oldPasswordField = new JPasswordField();
+        JPasswordField passwordField = new JPasswordField();
         
         Object[] content = {
-            "Нова парола:", password,
+            "Стара парола:", oldPasswordField,
+            "Нова парола:", passwordField,
         };
         
         int result = JOptionPane.showConfirmDialog(this, content, "Парола", JOptionPane.OK_CANCEL_OPTION);
         
         if (result == JOptionPane.OK_OPTION) {
             
-            String newPassword = new String(password.getPassword());
-            
-            if (query.updatePassword(newPassword)) {
+            String newPassword = new String(passwordField.getPassword());
+            String oldPassword = new String(oldPasswordField.getPassword());
+            if (query.updatePassword(newPassword, oldPassword)) {
                 JOptionPane.showMessageDialog(this, "Обновихме данните!");
                 UserInfo.setPassword(newPassword);
             } else {
-                JOptionPane.showMessageDialog(this, "Не успяхме да обновим данните!");
+                JOptionPane.showMessageDialog(this, "Грешна парола!");
             }
         }
     }
@@ -587,6 +629,7 @@ public class Account extends javax.swing.JFrame {
     private javax.swing.JLabel minimizeButton;
     private javax.swing.JLabel namesLabel;
     private javax.swing.JLabel profileIcon;
+    private javax.swing.JLabel removeAccount;
     private javax.swing.JLabel ticketsIcon;
     // End of variables declaration//GEN-END:variables
 

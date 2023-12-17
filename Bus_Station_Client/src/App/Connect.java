@@ -194,14 +194,15 @@ public class Connect {
         }
     }
     
-    public boolean updatePassword(String newPassword) {
-        String sql = "UPDATE Accounts SET Password = ? WHERE Username = ?";
+    public boolean updatePassword(String newPassword, String oldPassword) {
+        String sql = "UPDATE Accounts SET Password = ? WHERE Username = ? AND Password = ?";
         
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             System.out.println();
             pstmt.setString(1, newPassword);
             pstmt.setString(2, UserInfo.getUsername());
+            pstmt.setString(3, oldPassword);
             
             int rowsUpdated = pstmt.executeUpdate();
 
@@ -332,9 +333,9 @@ public class Connect {
         }
     }
     
-    public ArrayList<TicketExtendet> selectAllCoursesForAccount()
+    public ArrayList<TicketExtended> selectAllCoursesForAccount()
     {
-        ArrayList<TicketExtendet> data = new ArrayList();
+        ArrayList<TicketExtended> data = new ArrayList();
         String sql = "SELECT T.TicketId, C.CityFrom, C.CityTo, C.Date, C.Hour "
                 + "FROM Courses AS C JOIN Tickets AS T "
                 + "ON C.CourseId = T.CourseId "
@@ -351,7 +352,7 @@ public class Connect {
                 String cityTo = rs.getString("CityTo");
                 String date = rs.getString("Date");
                 String hour = rs.getString("Hour");
-                data.add(new TicketExtendet(ticketId, cityFrom, cityTo, date, hour));
+                data.add(new TicketExtended(ticketId, cityFrom, cityTo, date, hour));
             }
                     
         } catch (SQLException ex) {
@@ -372,10 +373,31 @@ public class Connect {
              int result = stmt.executeUpdate();
              
              System.out.println(result + " Rows deleted");
-             //stmt.setString(1, value);
              
          } catch(SQLException e) {
              System.out.println(e.getMessage());
+         }
+    }
+    
+    public boolean deleteAccount(String password) {
+        String sql = "DELETE FROM Accounts " +
+                        "WHERE Username = ? AND Password = ?";
+         System.out.println(sql);
+         
+         try {
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             stmt.setString(1, UserInfo.getUsername());
+             stmt.setString(2, password);
+             int result = stmt.executeUpdate();
+             if (result == 0) {
+                 return false;
+             }
+             System.out.println(result + " Rows deleted");
+             return true;
+             
+         } catch(SQLException e) {
+             System.out.println(e.getMessage());
+             return false;
          }
     }
 }

@@ -1,6 +1,6 @@
 package App;
 
-public class TicketExtendet {
+public class TicketExtended {
     private int ticketId;
     private int accountId;
     private int courseId;
@@ -9,7 +9,7 @@ public class TicketExtendet {
     private String date;
     private String hour;
     
-    public TicketExtendet(int ticketId, String cityFrom, String cityTo, String date, String hour) {
+    public TicketExtended(int ticketId, String cityFrom, String cityTo, String date, String hour) {
         this.ticketId = ticketId;
         this.cityFrom = cityFrom;
         this.cityTo = cityTo;
