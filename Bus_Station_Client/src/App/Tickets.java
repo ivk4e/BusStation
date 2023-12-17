@@ -499,13 +499,17 @@ public class Tickets extends javax.swing.JFrame {
         cityFrom.removeAllItems();
         
         cityFrom.addItem("");
+        cityFrom.addItem("Бургас");
         cityFrom.addItem("Варна");
+        cityFrom.addItem("Русе");
         cityFrom.addItem("София");
         cityFrom.setSelectedIndex(0);
         
         cityTo.addItem("");
-        cityTo.addItem("Русе");
+        cityTo.addItem("Бургас");
         cityTo.addItem("Варна");
+        cityTo.addItem("Русе");
+        cityTo.addItem("София");
         cityTo.setSelectedIndex(0);
         
         hours.addItem("");

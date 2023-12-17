@@ -1,8 +1,6 @@
 package App;
 
 import java.awt.*;
-import java.awt.Color;
-import javax.swing.plaf.ColorUIResource;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
